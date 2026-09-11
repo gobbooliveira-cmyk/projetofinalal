@@ -75,6 +75,22 @@ const perguntas = [
             
         ]
     },
+{
+        enunciado: "TeenWolf: Quem morde Scott MCCall no primeiro episódio, transformando-o em lobisomem?",
+        alternativas: [
+            {
+                texto:"Peter Hale.",
+                afirmacao:"afirmacao"
+            },
+            {
+                texto: "Malia Tate.",
+                afirmacao:"afirmacao"
+            }
+            
+            
+        ]
+    },
+
 ];
 
 let atual = 0; 
