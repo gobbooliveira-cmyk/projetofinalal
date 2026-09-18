@@ -10,12 +10,54 @@ const perguntas = [
         alternativas: [
             {
                 texto: "Isso é assustador!",
-                afirmacao: "No início, sentiu um certo receio quanto ao avanço acelerado da IA."
+                afirmacao: "afirmacao"
             },
             {
                 texto: "Isso é maravilhoso!",
-                afirmacao: "Ficou entusiasmado com as infinitas possibilidades do novo avanço tecnológico."
+                afirmacao: "afirmacao"
+            }           
+            
+        ]
+    },
+    {
+        enunciado: "Com a descoberta desta tecnologia, chamada Inteligência Artificial (IA), uma professora de tecnologia da escola decidiu fazer uma sequência de aulas sobre elaIA. No fim de uma aula ela pede que você escreva um trabalho sobre o uso de tecnologia em sala de aula. Qual atitude você toma?",
+        alternativas: [
+            {
+                texto:"Utilizar uma ferramenta de busca na internet que utiliza IA para que ela ajude a encontrar informações relevantes para o trabalho e explique numa linguagem que facilite o entendimento",
+                afirmacao:"afirmacao"
+            },
+            {
+                texto: "Escrever o trabalho com base nas conversas que teve com colegas, algumas pesquisas na internet e conhecimentos próprios sobre o tema.",
+                afirmacao:"afirmacao"
             }
+        ]
+    },
+    {
+        enunciado: "Após a elaboração do trabalho, a professora realizou um debate entre a turma para entender como foi realizada a pesquisa e escrita. Nessa conversa também foi levantado um ponto muito importante: como a IA impacta o trabalho do futuro. Nesse debate, como você se posiciona?",
+        alternativas: [
+            {
+                texto:"Me preocupo com as pessoas que perderão seus empregos para máquinas e defendem a importância de proteger os trabalhadores.",
+                afirmacao:"afirmacao"
+            },
+            {
+                texto:"Defende a ideia de que a IA pode criar novas oportunidades de emprego e melhorar habilidades humanas.",
+                afirmacao:"afirmacao"
+            }
+            
+        ]
+    },
+    {
+        enunciado: "Ao final da discussão, você precisou criar uma imagem no computador que representasse o que pensa sobre IA. E agora?",
+        alternativas: [
+            {
+                texto:"Criar uma imagem utilizando uma plataforma de design como o Paint.",
+                afirmacao:"afirmacao"
+            },
+            {
+                texto:"Criar uma imagem utilizando um gerador de imagem de IA.",
+                afirmacao:"afirmacao"
+            }
+            
         ]
     },
     {
@@ -23,25 +65,53 @@ const perguntas = [
         alternativas: [
             {
                 texto: "Peter Hale.",
-                afirmacao: "Demonstrou conhecer bem a história de Teen Wolf lembrando do Alfa original!"
+                afirmacao:"Demonstrou conhecer bem a história de Teen Wolf lembrando do Alfa original!"
             },
             {
                 texto: "Malia Tate.",
-                afirmacao: "Acabou confundindo os personagens da série Teen Wolf."
+                afirmacao:"Acabou confundindo os personagens da série Teen Wolf."
             }
+            
+            
         ]
     },
-    {
-        enunciado: "TeenWolf: Qual é a verdadeira natureza sobrenatural de Lydia Martin?",
-        alternativas: [
-            {
-                texto: "Kitsune.",
-                afirmacao: "Confundiu as criaturas sobrenaturais de Teen Wolf."
-            },
-            {
-                texto: "Banshee.",
-                afirmacao: "Acertou em cheio a verdadeira natureza de Lydia Martin em Teen Wolf!"
-            }
-        ]
-    }
 ];
+
+let atual = 0; 
+let perguntaAtual;
+let historiaFinal = "";
+
+function mostraPergunta() {
+    if(atual >= perguntas.length){
+        mostraResultado();
+        return;
+    }
+    perguntaAtual = perguntas[atual];
+    caixaPerguntas.textContent = perguntaAtual.enunciado;
+    caixaAlternativas.textContent = "";
+    mostraAlternativas();
+}
+
+function mostraAlternativas(){
+    for(const alternativa of perguntaAtual.alternativas){
+        const botaoAlternativas = document.createElement("button");
+        botaoAlternativas.textContent = alternativa.texto;
+        botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
+        caixaAlternativas.appendChild(botaoAlternativas);
+    }
+}
+
+function respostaSelecionada(opcaoSelecionada){
+    const afirmacoes = opcaoSelecionada.afirmacao;
+    historiaFinal += afirmacoes + " ";
+    atual++;
+    mostraPergunta();
+}
+
+function mostraResultado(){
+    caixaPerguntas.textContent = "Em 2049...";
+    textoResultado.textContent = historiaFinal;
+    caixaAlternativas.textContent = ""; 
+}
+
+mostraPergunta();
